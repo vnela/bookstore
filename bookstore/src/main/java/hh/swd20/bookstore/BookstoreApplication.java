@@ -30,8 +30,8 @@ public class BookstoreApplication {
 			price
 			*/
 
-			bookRepository.save(new Book("A Farewell to Arms","Ernest Hemingway", 1929, "1232323-21", 20));
-			bookRepository.save(new Book("Animal Farm", "George Orwell",1945, "2212343-5", 50));	
+			bookRepository.save(new Book("Harry Potter ja Viisasten kivi","J. K. Rowling", 1997, "951-31-1146-6", 5));
+			bookRepository.save(new Book("Värityskirja", "Marko Annala",2017, "978-952-01-1605-7", 14));	
 			
 			log.info("fetch all books");
 			for (Book book : bookRepository.findAll()) {

@@ -7,7 +7,7 @@ import javax.persistence.Id;
 
 @Entity
 public class Book {
-	@Id
+	@Id 
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	
 	// attribuutit: id, title, author, year, isbn, price
