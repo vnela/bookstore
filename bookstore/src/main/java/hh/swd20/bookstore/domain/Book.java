@@ -1,5 +1,8 @@
 package hh.swd20.bookstore.domain;
 
+import javax.persistence.Entity;
+
+@Entity
 public class Book {
 	
 	//attribuutit: title, author, year, isbn, price
