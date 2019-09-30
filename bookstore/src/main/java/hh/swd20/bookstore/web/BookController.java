@@ -30,17 +30,17 @@ public class BookController {
 		return "index";
 	}
 
-	/* kirjalistaus
+	// kirjalistaus
 	@RequestMapping(value = "/booklist", method = RequestMethod.GET)
 	public String getBooks(Model model) {
 		List<Book> books = (List<Book>) bookRepository.findAll();
 		model.addAttribute("books", books);
 		return "booklist";
 	}
-	*/
+	
 	
 	// RESTful service to get all books
-    @RequestMapping(value="/booklist", method = RequestMethod.GET)
+    @RequestMapping(value="/books", method = RequestMethod.GET)
     public @ResponseBody List<Book> bookListRest() {	
         return (List<Book>) bookRepository.findAll();
     } 
