@@ -5,7 +5,18 @@
 <title>Insert title here</title>
 </head>
 <body>
+<div>
 	<h1>Books</h1>
+	</div>
+		<div>
+		<h3 th:inline="text">Welcome, [[${#httpServletRequest.remoteUser}]]!</h3>
+	</div>
+	<div>
+		<form th:action="@{/logout}" method="post">
+			<input type="submit" value="Sign Out" class="btn btn-danger"/>
+		</form>
+		</div>
+		
 	<table>
 		<tr>
 			<th>Title</th>
@@ -14,6 +25,7 @@
 			<th>ISBN</th>
 			<th>Price</th>
 			<th>Category</th>
+			<th sec:authorize="hasRole('ADMIN')"> </th>
 		</tr>
 
 		<tr th:each="book : ${books}">
@@ -24,7 +36,7 @@
 			<td th:text="${book.price}">price</td>
 			<td th:text="${book.category.name}"></td>
 			<td><a th:href="@{/editbook/{id}(id=${book.id})}">Edit</a></td>
-			<td><a th:href="@{/deletebook/{id}(id=${book.id})}">Delete</a></td>
+			<td sec:authorize="hasRole('ADMIN')"><a th:href="@{/deletebook/{id}(id=${book.id})}">Delete</a></td>
 		</tr>
 	</table>
 	<br></br>
