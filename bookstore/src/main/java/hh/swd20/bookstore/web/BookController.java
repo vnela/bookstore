@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -20,7 +21,7 @@ import hh.swd20.bookstore.domain.CategoryRepository;
 
 public class BookController {
 	@Autowired
-	BookRepository bookRepository;
+	private BookRepository bookRepository;
 	
 	@Autowired
 	private CategoryRepository crepository;
@@ -35,7 +36,7 @@ public class BookController {
         return "login";
     }
 	// kirjalistaus
-	@RequestMapping(value = "/booklist", method = RequestMethod.GET)
+	@RequestMapping(value = "/booklist")
 	public String getBooks(Model model) {
 		List<Book> books = (List<Book>) bookRepository.findAll();
 		model.addAttribute("books", books);
@@ -56,7 +57,8 @@ public class BookController {
     }   
 
 	// tyhjän kirjalomakkeen muodostaminen
-	@RequestMapping(value = "/newbook", method = RequestMethod.GET)
+    @PreAuthorize("hasAuthority('USER')")
+	@RequestMapping(value = "/newbook")
 	public String getNewBookForm(Model model) {
 		model.addAttribute("book", new Book());
 		model.addAttribute("categories",crepository.findAll());
@@ -71,6 +73,7 @@ public class BookController {
 	}
 
 	// kirjan poisto
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/deletebook/{id}", method = RequestMethod.GET)
 	public String deleteBook(@PathVariable("id") Long bookId) {
 		bookRepository.deleteById(bookId);
